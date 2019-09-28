@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-28T02:01:38.128Z</updated>
+  <updated>2019-09-28T08:13:16.701Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql45讲-全局锁和表锁</title>
+    <link href="http://yoursite.com/2019/09/28/mysql45%E8%AE%B2-%E5%85%A8%E5%B1%80%E9%94%81%E5%92%8C%E8%A1%A8%E9%94%81/"/>
+    <id>http://yoursite.com/2019/09/28/mysql45讲-全局锁和表锁/</id>
+    <published>2019-09-28T08:11:12.000Z</published>
+    <updated>2019-09-28T08:13:16.701Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="mysql" scheme="http://yoursite.com/categories/mysql/"/>
+    
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
