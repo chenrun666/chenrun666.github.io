@@ -239,7 +239,7 @@
                 
               
 
-              <time title="创建时间：2019-10-13 10:53:58 / 修改时间：11:26:36" itemprop="dateCreated datePublished" datetime="2019-10-13T10:53:58+08:00">2019-10-13</time>
+              <time title="创建时间：2019-10-13 10:53:58 / 修改时间：15:35:06" itemprop="dateCreated datePublished" datetime="2019-10-13T10:53:58+08:00">2019-10-13</time>
             </span>
           
             
@@ -285,8 +285,121 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo brew install mongodb --with-openssl</span><br></pre></td></tr></table></figure>
 <p><strong>curl 安装</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 /usr/local</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载</span></span><br><span class="line">sudo curl -O https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-4.0.9.tgz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line">sudo tar -zxvf &lt;tgz name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名</span></span><br><span class="line">sudo mv &lt;old package name&gt; &lt;new package name&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="docker-安装"><a href="#docker-安装" class="headerlink" title="docker 安装"></a>docker 安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 搜索镜像</span></span><br><span class="line">docker search mongo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取官方镜像</span></span><br><span class="line">docker pull mogo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -p 27017:27017 -v <span class="variable">$PWD</span>/db:/data/db -d mongo --name mongo-01</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入容器内的mongo</span></span><br><span class="line">docker <span class="built_in">exec</span> -it &lt;contains name&gt; mongo admin</span><br></pre></td></tr></table></figure>
-
+<h4 id="docker-安装"><a href="#docker-安装" class="headerlink" title="docker 安装"></a>docker 安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 搜索镜像</span></span><br><span class="line">docker search mongo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取官方镜像</span></span><br><span class="line">docker pull mogo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -p 27017:27017 -v <span class="variable">$PWD</span>/db:/data/db -d mongo --name mongo-01</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入容器内的mongo</span></span><br><span class="line">docker <span class="built_in">exec</span> -it &lt;contains name&gt; mongo admin</span><br></pre></td></tr></table></figure>
+<h3 id="mongodb-操作"><a href="#mongodb-操作" class="headerlink" title="mongodb 操作"></a>mongodb 操作</h3><h4 id="mongodb-基本使用"><a href="#mongodb-基本使用" class="headerlink" title="mongodb 基本使用"></a>mongodb 基本使用</h4><ul>
+<li><p>查看数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show dbs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.dropDatabase()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><ul>
+<li>Object ID: 文档ID</li>
+<li>String: 字符串,最常用,必须是有效的UTF-8</li>
+<li>Boolean: 存储一个布尔值,true或者false</li>
+<li>Integer: 整数可以是32位或64位,这取决于服务器</li>
+<li>Double: 存储浮点值</li>
+<li>Arrays: 数组或列表,多个值存储到一个键</li>
+<li>Object: 用于嵌入式文档,即一个值为一个文档</li>
+<li>Null: 存储Null值</li>
+<li>Timestamp: 时间戳,表示1970-1-1到现在的总秒数</li>
+<li><p>Date: 存储当前日期或时间的UNIX时间格式</p>
+</li>
+<li><p>创建日期语句如下:</p>
+<ul>
+<li>new Date(‘2019-10-13’)</li>
+</ul>
+</li>
+<li><p>每个文档都有一个属性,为_id,保证每个文档的唯一性</p>
+</li>
+<li><p>可以自己设置_id插入文档,如果没有提供,那么mongoDB为每个文档提供一个独特的_id,类型为ObjectID</p>
+</li>
+<li><p>ObjectID是一个12字节的16进制数:</p>
+<ul>
+<li>前4字节为当前的时间戳</li>
+<li>接下来3个字节的机器ID</li>
+<li>接下来的2个字节中的MongoDB的服务进程ID</li>
+<li>最后三个字节是简单的增量值</li>
+</ul>
+</li>
+</ul>
+<h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><ul>
+<li>创建数据库</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use &lt;db name&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建集合</li>
+</ul>
+<p><strong>向不存在的集合中第一次加入数据时，集合会被创建出来</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.createCollection(name, options)</span><br><span class="line">db.createCollection(<span class="string">"stu"</span>)</span><br><span class="line">db.createCollection(<span class="string">"sub"</span>, &#123;capped:<span class="literal">true</span>, size: 10&#125;)</span><br></pre></td></tr></table></figure>
+<p>参数capped： 默认为false表示不设置上限<br>参数size： 当capped值为true，需要指定此参数，表示上限大小，当文档达到上限时，会将之前的数据覆盖，单位为字节</p>
+<ul>
+<li>插入文档</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection name&gt;.insert(document)</span><br></pre></td></tr></table></figure>
+<p><strong>实例</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.col.insert(&#123;name: <span class="string">"chen"</span>, age: 20&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h4><ul>
+<li>查看集合</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show collections</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看文档内容</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.col.find().pretty()</span><br></pre></td></tr></table></figure>
+<h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><ul>
+<li>更新文档</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">db.collection.update(</span><br><span class="line">    &lt;query&gt;,</span><br><span class="line">    &lt;&gt;,</span><br><span class="line">    &#123;</span><br><span class="line">        upsert: &lt;boolean&gt;,</span><br><span class="line">        multi: &lt;boolean&gt;,</span><br><span class="line">        writeConcern: &lt;document&gt;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.save(document)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>query: update的查询条件,类似sql update查询内where后面的</li>
+<li>update: update的对象和一些更新的操作符($, $inc…)等, 可以理解为sql update查询内的set</li>
+<li>upsert: 可选,这个参数的意思是,如果不存在update的记录,是否插入objnew,true为插入,默认是false,不插入</li>
+<li>mutli: 可选,mongodb默认是false,只更新找到的第一个条记录,如果这个参数是true,就是按照天及哦按查出来的多条记录全部更新</li>
+<li>writeConcern: 可选,抛出异常的级别</li>
+</ul>
+<p><strong>实例</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.col.update(&#123;name: <span class="string">'chen'</span>&#125;, &#123;<span class="variable">$set</span>: &#123;name: <span class="string">'peng'</span>&#125;&#125;)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.col.update(&#123;name: <span class="string">"chen"</span>&#125;, &#123;<span class="variable">$set</span>: &#123;age: 25&#125;&#125;, &#123;multi: <span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><ul>
+<li>删除集合</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;集合名称&gt;.drop()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除文档</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.collection.remove(</span><br><span class="line">    &lt;query&gt;,</span><br><span class="line">    &lt;justOne&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>MongoDB2.6以后<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.collection.remove(</span><br><span class="line">    &lt;query&gt;,</span><br><span class="line">    &#123;</span><br><span class="line">        justOne: &lt;boolean&gt;,</span><br><span class="line">        writeConcern: &lt;document&gt;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>query: (可选)删除的文档条件</li>
+<li>justOne: (可选)如果没有true或1,则只删除一个文档,如果不设置该参数,或者默认值为false, 则删除所有匹配条件的文档</li>
+<li>writeConcern: (可选)抛出异常的级别</li>
+</ul>
+<p><strong>实例</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.col.remove(&#123;title: <span class="string">"MongoDB 教程"</span>&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>删除所有匹配</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.col.remove(&#123;title: <span class="string">"MongoDB 教程"</span>&#125;, 1)</span><br></pre></td></tr></table></figure>
+<p>删除一个</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.col.remove(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>删除所有数据</p>
+<p><strong>remove()方法并不会真正释放空间.需要执行db.repairDatabase()来回收磁盘空间</strong></p>
+<h3 id="数据备份和恢复"><a href="#数据备份和恢复" class="headerlink" title="数据备份和恢复"></a>数据备份和恢复</h3><p><strong>备份</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongodump -h dbhost -d dbname -o dbdirectory</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>h: 服务器地址,也可以是指定端口号</li>
+<li>d: 需要备份的数据库名称</li>
+<li>o: 备份的数据库存放位置,此目录存放着备份出来的数据</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongodump -h 192.168.1.10:27017 -d test1 -p ~/db/data</span><br></pre></td></tr></table></figure>
+<p><strong>恢复</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongorestore -h dbhost -d dbname --dir dbdirectory</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>h: 服务器地址</li>
+<li>d: 需要恢复的数据库实例</li>
+<li>dir: 备份数据所在的位置</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongorestore -h 192.168.1.10:27017 -d test2 --dir ~/data/db</span><br></pre></td></tr></table></figure>
+<h3 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h3>
         
       
     </div>
