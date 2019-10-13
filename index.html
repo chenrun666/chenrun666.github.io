@@ -210,6 +210,456 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/13/mongoDB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="无名小润">
+      <meta itemprop="description" content="涉猎主要编程语言 Python、Go、Java、JavaScript、MySQL，领域涵盖爬虫，数据分析，数据库，Hacker等">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Spider-Man">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/13/mongoDB/" class="post-title-link" itemprop="url">mongoDB</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-13 10:53:58 / 修改时间：11:26:36" itemprop="dateCreated datePublished" datetime="2019-10-13T10:53:58+08:00">2019-10-13</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MongoDB/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="关系型和非关系型的介绍"><a href="#关系型和非关系型的介绍" class="headerlink" title="关系型和非关系型的介绍"></a>关系型和非关系型的介绍</h3><ul>
+<li>关系型数据库很强大，但是它并不能很好的应付所有的应用场景。MySQL的扩展性差，大数据下IO压力大，表结构更改困难</li>
+<li>非关系数据库，易扩展，大数据高性能，灵活的数据模型，高可用<ul>
+<li>易扩展：数据之间没有关系</li>
+<li>大数据量，高性能：NoSQL数据库都具有非常高的读写性能，尤其在大数据量下，同样变现优秀。</li>
+<li>灵活的数据模型：NoSQL无需事先为要存储的数据建立字段，随时可以存储自定义的数据格式。</li>
+</ul>
+</li>
+</ul>
+<h3 id="MongoDB-的安装"><a href="#MongoDB-的安装" class="headerlink" title="MongoDB 的安装"></a>MongoDB 的安装</h3><h4 id="OSX-MongoDB"><a href="#OSX-MongoDB" class="headerlink" title="OSX MongoDB"></a>OSX MongoDB</h4><p><strong>brew安装</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo brew install mongodb</span><br></pre></td></tr></table></figure></p>
+<p><strong>安装支持TLS/SSL</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo brew install mongodb --with-openssl</span><br></pre></td></tr></table></figure>
+<p><strong>curl 安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 /usr/local</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载</span></span><br><span class="line">sudo curl -O https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-4.0.9.tgz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line">sudo tar -zxvf &lt;tgz name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名</span></span><br><span class="line">sudo mv &lt;old package name&gt; &lt;new package name&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="docker-安装"><a href="#docker-安装" class="headerlink" title="docker 安装"></a>docker 安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 搜索镜像</span></span><br><span class="line">docker search mongo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取官方镜像</span></span><br><span class="line">docker pull mogo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -p 27017:27017 -v <span class="variable">$PWD</span>/db:/data/db -d mongo --name mongo-01</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入容器内的mongo</span></span><br><span class="line">docker <span class="built_in">exec</span> -it &lt;contains name&gt; mongo admin</span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/机器学习-决策树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="无名小润">
+      <meta itemprop="description" content="涉猎主要编程语言 Python、Go、Java、JavaScript、MySQL，领域涵盖爬虫，数据分析，数据库，Hacker等">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Spider-Man">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/09/机器学习-决策树/" class="post-title-link" itemprop="url">机器学习-决策树</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-09 14:45:52 / 修改时间：14:52:59" itemprop="dateCreated datePublished" datetime="2019-10-09T14:45:52+08:00">2019-10-09</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="决策树构造"><a href="#决策树构造" class="headerlink" title="决策树构造"></a>决策树构造</h3><ul>
+<li>优点<ul>
+<li>计算复杂度不高，输出结果易于理解，对中间值的缺失不敏感，可以处理相关特征数据</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>可能产生过度匹配问题</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>决策树的一般流程<ul>
+<li>收集数据： 可以使用任务方法</li>
+<li>准备数据： 树构造算法只适用于标称型数据，因此数值型数据必须离散化</li>
+<li>分析数据： 可以使用任务方法，构造树完成之后，我们应该检查图形是否符合预期</li>
+<li>训练算法： 构造树的数据结构</li>
+<li>测试算法： 使用经验树计算错误率</li>
+<li>使用算法： 测步骤可以使用于任何监督学习算法，而使用决策树可以更好地理解数据内在含义</li>
+</ul>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/机器学习-KNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="无名小润">
+      <meta itemprop="description" content="涉猎主要编程语言 Python、Go、Java、JavaScript、MySQL，领域涵盖爬虫，数据分析，数据库，Hacker等">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Spider-Man">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/09/机器学习-KNN/" class="post-title-link" itemprop="url">机器学习-KNN</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-09 14:40:59 / 修改时间：21:50:38" itemprop="dateCreated datePublished" datetime="2019-10-09T14:40:59+08:00">2019-10-09</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets, linear_model  <span class="comment"># 引用 sklearn库，主要是使用其中的线性回归模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建数据集，将数据写入到numpy数组</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">data = np.array([[<span class="number">152</span>, <span class="number">51</span>], [<span class="number">156</span>, <span class="number">53</span>], [<span class="number">160</span>, <span class="number">54</span>], [<span class="number">164</span>, <span class="number">55</span>],</span><br><span class="line">                 [<span class="number">168</span>, <span class="number">57</span>], [<span class="number">172</span>, <span class="number">60</span>], [<span class="number">176</span>, <span class="number">62</span>], [<span class="number">180</span>, <span class="number">65</span>],</span><br><span class="line">                 [<span class="number">184</span>, <span class="number">69</span>], [<span class="number">188</span>, <span class="number">72</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印数组的大小~</span></span><br><span class="line">print(data.shape)</span><br><span class="line">x, y = data[:, <span class="number">0</span>].reshape(<span class="number">-1</span>, <span class="number">1</span>), data[:, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># TODO 1. 实例化一个线性回归的模型</span></span><br><span class="line">regr = linear_model.LinearRegression()</span><br><span class="line"></span><br><span class="line"><span class="comment"># TODO 2. 在x,y上训练一个线性回归模型。 如果训练顺利，则regr会存储训练完成之后的结果模型</span></span><br><span class="line">regr.fit(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># TODO 3. 画出身高与体重之间的关系</span></span><br><span class="line">plt.scatter(x, y, color=<span class="string">'red'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 画出已训练好的线条</span></span><br><span class="line"><span class="comment"># plt.plot(x, regr.predict(x), color='blue')</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 画x,y轴的标题</span></span><br><span class="line">plt.xlabel(<span class="string">'height (cm)'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'weight (kg)'</span>)</span><br><span class="line">plt.show()  <span class="comment"># 展示</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用已经训练好的模型去预测身高为163的人的体重</span></span><br><span class="line">print(<span class="string">"Standard weight for person with 163 is %.2f"</span> % regr.predict([[<span class="number">163</span>]]))</span><br></pre></td></tr></table></figure>
+<h4 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">x = iris.data</span><br><span class="line">y = iris.target</span><br><span class="line"></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=<span class="number">2003</span>)</span><br><span class="line"></span><br><span class="line">clf = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br><span class="line">clf.fit(x_train, y_train)</span><br><span class="line"></span><br><span class="line">correct = np.count_nonzero((clf.predict(x_test) == y_test) == <span class="literal">True</span>)</span><br><span class="line">print(<span class="string">"Accuracy is : %.3f"</span> % (correct / len(x_test)))</span><br></pre></td></tr></table></figure>
+<h4 id="实现KNN算法"><a href="#实现KNN算法" class="headerlink" title="实现KNN算法"></a>实现KNN算法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">x = iris.data</span><br><span class="line">y = iris.target</span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=<span class="number">2003</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">euc_dis</span><span class="params">(instance1, instance2)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    计算两个样本instance1和instance2之间的欧式距离</span></span><br><span class="line"><span class="string">    instance1: 第一个样本， array型</span></span><br><span class="line"><span class="string">    instance2: 第二个样本， array型</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># TODO</span></span><br><span class="line">    dist = np.sqrt(sum((instance1 - instance2) ** <span class="number">2</span>))</span><br><span class="line">    <span class="keyword">return</span> dist</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">knn_classify</span><span class="params">(x, y, testInstance, k)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    给定一个测试数据testInstance, 通过KNN算法来预测它的标签。</span></span><br><span class="line"><span class="string">    X: 训练数据的特征</span></span><br><span class="line"><span class="string">    y: 训练数据的标签</span></span><br><span class="line"><span class="string">    testInstance: 测试数据，这里假定一个测试数据 array型</span></span><br><span class="line"><span class="string">    k: 选择多少个neighbors?</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># TODO  返回testInstance的预测标签 = &#123;0,1,2&#125;</span></span><br><span class="line">    distances = [euc_dis(a, testInstance) <span class="keyword">for</span> a <span class="keyword">in</span> x]</span><br><span class="line">    kneighbors = np.argsort(distances)[:k]</span><br><span class="line">    count = Counter(y[kneighbors])</span><br><span class="line">    <span class="keyword">return</span> count.most_common()[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 预测结果。</span></span><br><span class="line">predictions = [knn_classify(x_train, y_train, data, <span class="number">3</span>) <span class="keyword">for</span> data <span class="keyword">in</span> x_test]</span><br><span class="line">correct = np.count_nonzero((predictions == y_test) == <span class="literal">True</span>)</span><br><span class="line">print(<span class="string">"Accuracy is: %.3f"</span> % (correct / len(x_test)))</span><br></pre></td></tr></table></figure>
+<h4 id="选择合适的K值"><a href="#选择合适的K值" class="headerlink" title="选择合适的K值"></a>选择合适的K值</h4><ul>
+<li>为了选择合理的K， 首先需要理解K对模型的影响</li>
+<li>为了理解K对模型的影响，首先先理解什么叫模型的决策边界</li>
+</ul>
+<h5 id="决策边界"><a href="#决策边界" class="headerlink" title="决策边界"></a>决策边界</h5><ul>
+<li>例1: 大学里60分以上为及格，60分一下不及格。那么60就是决策边界</li>
+<li><p>例2: 今年某高校引入35岁一下，具有海外研究经验3年以上的的学者</p>
+</li>
+<li><p>决策边界分为两大类</p>
+<ul>
+<li>线性决策边界</li>
+<li>非线性决策边界</li>
+</ul>
+</li>
+</ul>
+<h5 id="模型的泛化能力"><a href="#模型的泛化能力" class="headerlink" title="模型的泛化能力"></a>模型的泛化能力</h5><ul>
+<li><p>在新的环境中的适应能力</p>
+</li>
+<li><p>随着K值的增大，决策边界也变得更加平滑。决策边界的平滑也意味着模型的稳定性。但是稳定不代表，这个模型就会越准确</p>
+</li>
+</ul>
+<h4 id="交叉验证"><a href="#交叉验证" class="headerlink" title="交叉验证"></a>交叉验证</h4><ul>
+<li>交叉验证是机器学习建模中非常重要的一步，也是大多数人所说的“调参”的过程</li>
+<li><p>核心思想就是把一些可能的K逐个去尝试一遍，然后选出效果最好的K值</p>
+</li>
+<li><p>把训练数据进一步分成训练数据和验证集，选择在验证数据里最好的超参数组合</p>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/07/kali-主动信息收集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="无名小润">
+      <meta itemprop="description" content="涉猎主要编程语言 Python、Go、Java、JavaScript、MySQL，领域涵盖爬虫，数据分析，数据库，Hacker等">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Spider-Man">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/07/kali-主动信息收集/" class="post-title-link" itemprop="url">kali-主动信息收集</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-07 10:43:08 / 修改时间：12:02:06" itemprop="dateCreated datePublished" datetime="2019-10-07T10:43:08+08:00">2019-10-07</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/kali/" itemprop="url" rel="index"><span itemprop="name">kali</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="主动信息收集"><a href="#主动信息收集" class="headerlink" title="主动信息收集"></a>主动信息收集</h3><ul>
+<li>直接与目标系统交互通信</li>
+<li>无法避免留下访问的痕迹</li>
+<li>使用受控的第三方电脑进行探测<ul>
+<li>使用代理或已经被控制的主机</li>
+<li>做好被封杀的准备</li>
+<li>使用噪声迷惑目标，淹没真实的探测流量</li>
+</ul>
+</li>
+<li>扫描<ul>
+<li>发送不同的侦测，根据返回结果判断目标状态</li>
+</ul>
+</li>
+</ul>
+<h4 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h4><ul>
+<li>识别活着的主机<ul>
+<li>潜在的攻击目标</li>
+</ul>
+</li>
+<li>输出一个IP地址列表</li>
+<li>2，3，4层发现</li>
+</ul>
+<h5 id="发现—-二层发现-数据链路层-ARP"><a href="#发现—-二层发现-数据链路层-ARP" class="headerlink" title="发现—-二层发现 数据链路层 ARP"></a>发现—-二层发现 数据链路层 ARP</h5><ul>
+<li>优点： 扫描速度块，可靠</li>
+<li>缺点： 不可路由</li>
+<li><p>ARP协议</p>
+<ul>
+<li>抓包</li>
+</ul>
+</li>
+<li><p>arping</p>
+</li>
+<li>arping 1.1.1.1 -c 1</li>
+<li>arping 1.1.1.1 -d</li>
+<li><p>arping 1.1.1.1 -c 1 | grep “bytes from” | cut -d “ “ -f 5 | cut -d “(“ -f 2 | cut -d “)” -f 1</p>
+</li>
+<li><p>nmap 1.1.1.1-254 -sn</p>
+</li>
+<li><p>nmap -iL iplist.txt -sn</p>
+</li>
+<li><p>netdiscover<br>  - </p>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/mysql45讲-事务隔离/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1028,7 +1478,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1041,7 +1491,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1054,7 +1504,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -1198,6 +1648,14 @@ window.addEventListener('pjax:success', () => {
   
 
   
+    
+      
+    
+      
+    
+      
+    
+      
     
       
     

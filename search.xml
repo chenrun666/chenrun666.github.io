@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[mongoDB]]></title>
+    <url>%2F2019%2F10%2F13%2FmongoDB%2F</url>
+    <content type="text"><![CDATA[关系型和非关系型的介绍 关系型数据库很强大，但是它并不能很好的应付所有的应用场景。MySQL的扩展性差，大数据下IO压力大，表结构更改困难 非关系数据库，易扩展，大数据高性能，灵活的数据模型，高可用 易扩展：数据之间没有关系 大数据量，高性能：NoSQL数据库都具有非常高的读写性能，尤其在大数据量下，同样变现优秀。 灵活的数据模型：NoSQL无需事先为要存储的数据建立字段，随时可以存储自定义的数据格式。 MongoDB 的安装OSX MongoDBbrew安装1sudo brew install mongodb 安装支持TLS/SSL 1sudo brew install mongodb --with-openssl curl 安装 1234567891011# 进入 /usr/localcd /usr/local# 下载sudo curl -O https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-4.0.9.tgz# 解压sudo tar -zxvf &lt;tgz name&gt;# 重命名sudo mv &lt;old package name&gt; &lt;new package name&gt; docker 安装1234567891011# 搜索镜像docker search mongo# 拉取官方镜像docker pull mogo# 运行容器docker run -p 27017:27017 -v $PWD/db:/data/db -d mongo --name mongo-01# 进入容器内的mongodocker exec -it &lt;contains name&gt; mongo admin]]></content>
+      <categories>
+        <category>MongoDB</category>
+      </categories>
+      <tags>
+        <tag>MongoDB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[机器学习-决策树]]></title>
+    <url>%2F2019%2F10%2F09%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%86%B3%E7%AD%96%E6%A0%91%2F</url>
+    <content type="text"><![CDATA[决策树构造 优点 计算复杂度不高，输出结果易于理解，对中间值的缺失不敏感，可以处理相关特征数据 缺点 可能产生过度匹配问题 决策树的一般流程 收集数据： 可以使用任务方法 准备数据： 树构造算法只适用于标称型数据，因此数值型数据必须离散化 分析数据： 可以使用任务方法，构造树完成之后，我们应该检查图形是否符合预期 训练算法： 构造树的数据结构 测试算法： 使用经验树计算错误率 使用算法： 测步骤可以使用于任何监督学习算法，而使用决策树可以更好地理解数据内在含义]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[机器学习-KNN]]></title>
+    <url>%2F2019%2F10%2F09%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-KNN%2F</url>
+    <content type="text"><![CDATA[线性回归123456789101112131415161718192021222324252627282930313233from sklearn import datasets, linear_model # 引用 sklearn库，主要是使用其中的线性回归模块# 创建数据集，将数据写入到numpy数组import numpy as npimport matplotlib.pyplot as pltdata = np.array([[152, 51], [156, 53], [160, 54], [164, 55], [168, 57], [172, 60], [176, 62], [180, 65], [184, 69], [188, 72]])# 打印数组的大小~print(data.shape)x, y = data[:, 0].reshape(-1, 1), data[:, 1]# TODO 1. 实例化一个线性回归的模型regr = linear_model.LinearRegression()# TODO 2. 在x,y上训练一个线性回归模型。 如果训练顺利，则regr会存储训练完成之后的结果模型regr.fit(x, y)# TODO 3. 画出身高与体重之间的关系plt.scatter(x, y, color='red')# 画出已训练好的线条# plt.plot(x, regr.predict(x), color='blue')# 画x,y轴的标题plt.xlabel('height (cm)')plt.ylabel('weight (kg)')plt.show() # 展示# 利用已经训练好的模型去预测身高为163的人的体重print("Standard weight for person with 163 is %.2f" % regr.predict([[163]])) KNN12345678910111213141516from sklearn import datasetsfrom sklearn.model_selection import train_test_splitfrom sklearn.neighbors import KNeighborsClassifierimport numpy as npiris = datasets.load_iris()x = iris.datay = iris.targetx_train, x_test, y_train, y_test = train_test_split(x, y, random_state=2003)clf = KNeighborsClassifier(n_neighbors=3)clf.fit(x_train, y_train)correct = np.count_nonzero((clf.predict(x_test) == y_test) == True)print("Accuracy is : %.3f" % (correct / len(x_test))) 实现KNN算法1234567891011121314151617181920212223242526272829303132333435363738394041from sklearn import datasetsfrom collections import Counterfrom sklearn.model_selection import train_test_splitimport numpy as npiris = datasets.load_iris()x = iris.datay = iris.targetx_train, x_test, y_train, y_test = train_test_split(x, y, random_state=2003)def euc_dis(instance1, instance2): """ 计算两个样本instance1和instance2之间的欧式距离 instance1: 第一个样本， array型 instance2: 第二个样本， array型 """ # TODO dist = np.sqrt(sum((instance1 - instance2) ** 2)) return distdef knn_classify(x, y, testInstance, k): """ 给定一个测试数据testInstance, 通过KNN算法来预测它的标签。 X: 训练数据的特征 y: 训练数据的标签 testInstance: 测试数据，这里假定一个测试数据 array型 k: 选择多少个neighbors? """ # TODO 返回testInstance的预测标签 = &#123;0,1,2&#125; distances = [euc_dis(a, testInstance) for a in x] kneighbors = np.argsort(distances)[:k] count = Counter(y[kneighbors]) return count.most_common()[0][0]# 预测结果。predictions = [knn_classify(x_train, y_train, data, 3) for data in x_test]correct = np.count_nonzero((predictions == y_test) == True)print("Accuracy is: %.3f" % (correct / len(x_test))) 选择合适的K值 为了选择合理的K， 首先需要理解K对模型的影响 为了理解K对模型的影响，首先先理解什么叫模型的决策边界 决策边界 例1: 大学里60分以上为及格，60分一下不及格。那么60就是决策边界 例2: 今年某高校引入35岁一下，具有海外研究经验3年以上的的学者 决策边界分为两大类 线性决策边界 非线性决策边界 模型的泛化能力 在新的环境中的适应能力 随着K值的增大，决策边界也变得更加平滑。决策边界的平滑也意味着模型的稳定性。但是稳定不代表，这个模型就会越准确 交叉验证 交叉验证是机器学习建模中非常重要的一步，也是大多数人所说的“调参”的过程 核心思想就是把一些可能的K逐个去尝试一遍，然后选出效果最好的K值 把训练数据进一步分成训练数据和验证集，选择在验证数据里最好的超参数组合]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[kali-主动信息收集]]></title>
+    <url>%2F2019%2F10%2F07%2Fkali-%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[主动信息收集 直接与目标系统交互通信 无法避免留下访问的痕迹 使用受控的第三方电脑进行探测 使用代理或已经被控制的主机 做好被封杀的准备 使用噪声迷惑目标，淹没真实的探测流量 扫描 发送不同的侦测，根据返回结果判断目标状态 发现 识别活着的主机 潜在的攻击目标 输出一个IP地址列表 2，3，4层发现 发现—-二层发现 数据链路层 ARP 优点： 扫描速度块，可靠 缺点： 不可路由 ARP协议 抓包 arping arping 1.1.1.1 -c 1 arping 1.1.1.1 -d arping 1.1.1.1 -c 1 | grep “bytes from” | cut -d “ “ -f 5 | cut -d “(“ -f 2 | cut -d “)” -f 1 nmap 1.1.1.1-254 -sn nmap -iL iplist.txt -sn netdiscover -]]></content>
+      <categories>
+        <category>kali</category>
+      </categories>
+      <tags>
+        <tag>kali</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[mysql45讲-事务隔离]]></title>
     <url>%2F2019%2F09%2F30%2Fmysql45%E8%AE%B2-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%2F</url>
     <content type="text"><![CDATA[一个事务要更新一行，如果刚好有另外 一个事务拥有这一行的行锁，它又不能这么超然了，会被锁住，进入等待状态。问题是，既然进 入了等待状态，那么等到这个事务自己获取到行锁要更新数据的时候，它读到的值又是什么呢？ 举一个例子 12345create table `t` ( `id` int(11) NOT NULL, `k` int(11) DEFAULT NULL, primary key (`id`)) engine=InnoDB; 事务A 事务B 事务C start transaction with consistent snapshot; start transaction with consistent snapshot; update t set k=k+1 where id=1; update t set k=k+1 where id=1;select k from t where id=1; select K from t where id=1;commit; commit; 这里需要注意 事务的启动时机 begin/start transaction 命令并不是一个事务的起点，在执行到他们之后的第一个操作InnoDB表的语句，事务才真正启动。如果你想要马上启动一个事务，可以使用 start transaction with consistent snapshot 在MySQL里，有两个“视图”的概念 一个是view。他是一个用查询语句定义的虚拟表，在调用的时候执行查询语句并生成结果。创建视图的语法是create view…，而它的查询方法与表一样 另一个是InnoDB在实现MVCC时用到的一致性读视图，即consistent read view,用于支持RC9(Read Committed, 读提交)和RR (Repeatable Read, 可重复读) 隔离级别的实现。 它没有物理结构，作用是事务执行期间用来定义“我能看到什么数据”。 每一个事务都会标记一个rowtrx_id, 按照可重复读的定义，一个事务启动的时候，能够看到所有已经提交的事务结果。但是之后，这个事务执行期间，其他事务的更新对它不可见。 在实现上。InnoDB为每个事务构造了一个数组，用来保存这个事务启动瞬间。 数组里面的事务ID的最小值记为低水位，当前系统里面创建过的事务IJ为最大值加1结尾高水位。 这个事务数组和高水位，就组成了当前事务的一致性视图 而数据版本的可见性规则，就是基于数据的rowtrx_id和这个一致性视图的对比结果得到的。]]></content>
