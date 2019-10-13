@@ -239,7 +239,7 @@
                 
               
 
-              <time title="创建时间：2019-10-13 10:53:58 / 修改时间：15:35:06" itemprop="dateCreated datePublished" datetime="2019-10-13T10:53:58+08:00">2019-10-13</time>
+              <time title="创建时间：2019-10-13 10:53:58 / 修改时间：17:40:40" itemprop="dateCreated datePublished" datetime="2019-10-13T10:53:58+08:00">2019-10-13</time>
             </span>
           
             
@@ -273,14 +273,16 @@
       
           <h3 id="关系型和非关系型的介绍"><a href="#关系型和非关系型的介绍" class="headerlink" title="关系型和非关系型的介绍"></a>关系型和非关系型的介绍</h3><ul>
 <li>关系型数据库很强大，但是它并不能很好的应付所有的应用场景。MySQL的扩展性差，大数据下IO压力大，表结构更改困难</li>
-<li>非关系数据库，易扩展，大数据高性能，灵活的数据模型，高可用<ul>
+<li><p>非关系数据库，易扩展，大数据高性能，灵活的数据模型，高可用</p>
+<ul>
 <li>易扩展：数据之间没有关系</li>
 <li>大数据量，高性能：NoSQL数据库都具有非常高的读写性能，尤其在大数据量下，同样变现优秀。</li>
 <li>灵活的数据模型：NoSQL无需事先为要存储的数据建立字段，随时可以存储自定义的数据格式。</li>
 </ul>
 </li>
 </ul>
-<h3 id="MongoDB-的安装"><a href="#MongoDB-的安装" class="headerlink" title="MongoDB 的安装"></a>MongoDB 的安装</h3><h4 id="OSX-MongoDB"><a href="#OSX-MongoDB" class="headerlink" title="OSX MongoDB"></a>OSX MongoDB</h4><p><strong>brew安装</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo brew install mongodb</span><br></pre></td></tr></table></figure></p>
+<h3 id="MongoDB-的安装"><a href="#MongoDB-的安装" class="headerlink" title="MongoDB 的安装"></a>MongoDB 的安装</h3><h4 id="OSX-MongoDB"><a href="#OSX-MongoDB" class="headerlink" title="OSX MongoDB"></a>OSX MongoDB</h4><p><strong>brew安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo brew install mongodb</span><br></pre></td></tr></table></figure>
 <p><strong>安装支持TLS/SSL</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo brew install mongodb --with-openssl</span><br></pre></td></tr></table></figure>
 <p><strong>curl 安装</strong></p>
@@ -399,7 +401,69 @@
 <li>dir: 备份数据所在的位置</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongorestore -h 192.168.1.10:27017 -d test2 --dir ~/data/db</span><br></pre></td></tr></table></figure>
-<h3 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h3>
+<h3 id="条件操作符"><a href="#条件操作符" class="headerlink" title="条件操作符"></a>条件操作符</h3><ul>
+<li>(&gt;) 大于 - $gt</li>
+<li>(&lt;) 小于 - $lt</li>
+<li>(&gt;=) 大于等于 - $gte</li>
+<li>(&lt;=) 小于等于 - $lte</li>
+<li>(==) 等于 - $eq</li>
+<li>(!=) 不等于 - $ne</li>
+</ul>
+<h3 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h3><ul>
+<li>$goup: 将集合中的文档分组,可以用于统计结果</li>
+<li>$match: 过滤数据,只输出符合条件的文档</li>
+<li>$project: 修改输入文档的结构,如重命名,增加,删除字段, 创建计算结果</li>
+<li>$sort: 将输入文档排序后输出</li>
+<li>$limit: 限制聚合管道返回的文档数</li>
+<li>$skip: 跳过指定数量的文档,并返回余下的文档</li>
+<li>$unwind: 将数组类型的字段进行拆分</li>
+</ul>
+<p>处理输入文档并输入</p>
+<ul>
+<li>$sum: 计算总和, $sum:1 表示以一倍计数</li>
+<li>$avg: 计算平均数</li>
+<li>$min: 获取最小值</li>
+<li>$max: 获取最大值</li>
+<li>$push: 在结果文档中插入值到一个数组中</li>
+<li>$first: 根据资源文档的排序获取到第一个文档数据</li>
+<li>$last: 根据文档的排序获取最后一个文档数据</li>
+</ul>
+<h4 id="group"><a href="#group" class="headerlink" title="$group"></a>$group</h4><ul>
+<li>将集合中的文档分组,可用于统计结果</li>
+<li>_id表示分组的依据, 使用某个字段的格式为”$字段”</li>
+<li>例1:统计男生,女生的总人数<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;<span class="variable">$group</span>:</span><br><span class="line">        &#123;</span><br><span class="line">            _id: <span class="string">"<span class="variable">$gender</span>"</span>,</span><br><span class="line">            counter: &#123;<span class="variable">$sum</span>: 1&#125;,</span><br><span class="line">            avg_age: &#123;<span class="variable">$avg</span>: <span class="string">"<span class="variable">$age</span>"</span>&#125;,</span><br><span class="line">            max_age: &#123;<span class="variable">$max</span>: <span class="string">"<span class="variable">$age</span>"</span>&#125;,</span><br><span class="line">            min_age: &#123;<span class="variable">$min</span>: <span class="string">"<span class="variable">$age</span>"</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>group by null</strong></p>
+<ul>
+<li>统计整个文档</li>
+<li>将集合中的所有文档分为一组</li>
+<li>例2:求学生总人数, 平均年龄</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$group</span>: &#123;</span><br><span class="line">            _id: null,</span><br><span class="line">            counter: &#123;<span class="variable">$sum</span>: 1&#125;,</span><br><span class="line">            avgAge: &#123;<span class="variable">$avg</span>: <span class="string">"<span class="variable">$age</span>"</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="project"><a href="#project" class="headerlink" title="project"></a>project</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$group</span>: &#123;</span><br><span class="line">            _id: <span class="string">"<span class="variable">$gender</span>"</span>,</span><br><span class="line">            counter: &#123;<span class="variable">$sum</span>: 1&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$project</span>: &#123;</span><br><span class="line">            _id: 0,</span><br><span class="line">            gender: <span class="string">"<span class="variable">$_id</span>"</span>,</span><br><span class="line">            counter: <span class="string">"<span class="variable">$counter</span>"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>$project: 调整数据输出的字段显示</li>
+</ul>
+<h4 id="match"><a href="#match" class="headerlink" title="$match"></a>$match</h4><ul>
+<li>用于过滤数据,只输出符合条件的文档</li>
+<li>使用MongoDB的标准查询操作</li>
+<li><p>例1: 查询年龄大于20的学生</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$match</span>: &#123;</span><br><span class="line">            age: &#123;<span class="variable">$gt</span>: 20&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例2: 查询年龄大于20的男生,女生的人数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$match</span>: &#123;</span><br><span class="line">            age: &#123;<span class="variable">$gt</span>: 20&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$group</span>: &#123;</span><br><span class="line">            _id: <span class="string">"<span class="variable">$gender</span>"</span>,</span><br><span class="line">            counter: &#123;<span class="variable">$sum</span>: 1&#125;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$project</span>: &#123;</span><br><span class="line">            _id: 0,</span><br><span class="line">            gender: <span class="string">"<span class="variable">$gender</span>"</span>,</span><br><span class="line">            counter: <span class="string">"<span class="variable">$counter</span>"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例3: 年龄大于20,并且名字中含有chen</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$match</span>: &#123;</span><br><span class="line">            <span class="variable">$or</span>: [</span><br><span class="line">                &#123;age: &#123;<span class="variable">$gt</span>: 20&#125;&#125;,</span><br><span class="line">                &#123;name: &#123;<span class="variable">$in</span>: [<span class="string">"chen"</span>]&#125;&#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$group</span>: &#123;</span><br><span class="line">            _id: <span class="string">"<span class="variable">$gender</span>"</span>,</span><br><span class="line">            counter: &#123;<span class="variable">$sum</span>: 1&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$project</span>: &#123;</span><br><span class="line">            _id: 0,</span><br><span class="line">            gender: <span class="string">"<span class="variable">$gender</span>"</span>,</span><br><span class="line">            counter: <span class="string">"<span class="variable">$counter</span>"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例4: 统计每个country/province下的userid的数量(同一个userid只统计一次)</p>
+</li>
+<li><p>数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;country: <span class="string">"china"</span>, province: <span class="string">"sh"</span>, userid: <span class="string">"a"</span>&#125;</span><br><span class="line">&#123;country: <span class="string">"china"</span>, province: <span class="string">"sh"</span>, userid: <span class="string">"b"</span>&#125;</span><br><span class="line">&#123;country: <span class="string">"china"</span>, province: <span class="string">"sh"</span>, userid: <span class="string">"a"</span>&#125;</span><br><span class="line">&#123;country: <span class="string">"china"</span>, province: <span class="string">"sh"</span>, userid: <span class="string">"c"</span>&#125;</span><br><span class="line">&#123;country: <span class="string">"china"</span>, province: <span class="string">"bj"</span>, userid: <span class="string">"da"</span>&#125;</span><br><span class="line">&#123;country: <span class="string">"china"</span>, province: <span class="string">"bj"</span>, userid: <span class="string">"fa"</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">db.info.aggregate(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$group</span>: &#123;</span><br><span class="line">            _id: &#123;</span><br><span class="line">                country: <span class="string">"<span class="variable">$country</span>"</span>,</span><br><span class="line">                province: <span class="string">"<span class="variable">$province</span>"</span>,</span><br><span class="line">                userid: <span class="string">"<span class="variable">$userid</span>"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$group</span>: &#123;</span><br><span class="line">            _id: &#123;</span><br><span class="line">                country: <span class="string">"<span class="variable">$_id</span>.country"</span>,</span><br><span class="line">                province: <span class="string">"<span class="variable">$_id</span>.province"</span></span><br><span class="line">            &#125;,</span><br><span class="line">            counter: &#123;<span class="variable">$sum</span>: 1&#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$project</span>: &#123;</span><br><span class="line">            _id: 0,</span><br><span class="line">            country: <span class="string">"<span class="variable">$_id</span>.country"</span>,</span><br><span class="line">            province: <span class="string">"<span class="variable">$_id</span>.province"</span>,</span><br><span class="line">            counter: 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
         
       
     </div>
