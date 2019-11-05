@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-13T10:49:48.115Z</updated>
+  <updated>2019-11-05T15:00:48.860Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,73 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C_Primer_Plus-数据和C</title>
+    <link href="http://yoursite.com/2019/11/05/C-Primer-Plus-%E6%95%B0%E6%8D%AE%E5%92%8CC/"/>
+    <id>http://yoursite.com/2019/11/05/C-Primer-Plus-数据和C/</id>
+    <published>2019-11-05T14:56:37.000Z</published>
+    <updated>2019-11-05T15:00:48.860Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="数据和C"><a href="#数据和C" class="headerlink" title="数据和C"></a>数据和C</h2><p>关键字: int, short, long, unsigned, char, float, double, _Bool, _Complex, _Imaginary<br>运算符: sizeof()<br>函  数: scanf()</p><p>整数类型和浮点数类型的区别</p><p>如何使用printf()和scanf()函数读写不同类型的值</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;数据和C&quot;&gt;&lt;a href=&quot;#数据和C&quot; class=&quot;headerlink&quot; title=&quot;数据和C&quot;&gt;&lt;/a&gt;数据和C&lt;/h2&gt;&lt;p&gt;关键字: int, short, long, unsigned, char, float, double, _Bool, _
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>深入理解计算机系统-程序结构和执行</title>
+    <link href="http://yoursite.com/2019/11/05/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84%E5%92%8C%E6%89%A7%E8%A1%8C/"/>
+    <id>http://yoursite.com/2019/11/05/深入理解计算机系统-程序结构和执行/</id>
+    <published>2019-11-05T14:34:43.000Z</published>
+    <updated>2019-11-05T14:46:51.277Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="程序结构和执行"><a href="#程序结构和执行" class="headerlink" title="程序结构和执行"></a>程序结构和执行</h2><h3 id="1-信息的表示和处理"><a href="#1-信息的表示和处理" class="headerlink" title="1 信息的表示和处理"></a>1 信息的表示和处理</h3><h4 id="信息存储"><a href="#信息存储" class="headerlink" title="信息存储"></a>信息存储</h4><h4 id="整数表示"><a href="#整数表示" class="headerlink" title="整数表示"></a>整数表示</h4><h4 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h4><h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><h3 id="2-程序的机器级表示"><a href="#2-程序的机器级表示" class="headerlink" title="2 程序的机器级表示"></a>2 程序的机器级表示</h3><h4 id="程序编码"><a href="#程序编码" class="headerlink" title="程序编码"></a>程序编码</h4><h4 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h4><h4 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h4><h4 id="算数和逻辑操作"><a href="#算数和逻辑操作" class="headerlink" title="算数和逻辑操作"></a>算数和逻辑操作</h4><h4 id="控制"><a href="#控制" class="headerlink" title="控制"></a>控制</h4><h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><h4 id="数组分配和访问"><a href="#数组分配和访问" class="headerlink" title="数组分配和访问"></a>数组分配和访问</h4><h4 id="异数的数据结构"><a href="#异数的数据结构" class="headerlink" title="异数的数据结构"></a>异数的数据结构</h4><h4 id="在机器级程序中将控制和数据结合起来"><a href="#在机器级程序中将控制和数据结合起来" class="headerlink" title="在机器级程序中将控制和数据结合起来"></a>在机器级程序中将控制和数据结合起来</h4><h4 id="浮点代码"><a href="#浮点代码" class="headerlink" title="浮点代码"></a>浮点代码</h4><h3 id="3-处理器体系结构"><a href="#3-处理器体系结构" class="headerlink" title="3 处理器体系结构"></a>3 处理器体系结构</h3><h4 id="Y86-64指令集体系结构"><a href="#Y86-64指令集体系结构" class="headerlink" title="Y86-64指令集体系结构"></a>Y86-64指令集体系结构</h4><h4 id="逻辑设计和硬件控制语言HCL"><a href="#逻辑设计和硬件控制语言HCL" class="headerlink" title="逻辑设计和硬件控制语言HCL"></a>逻辑设计和硬件控制语言HCL</h4><h4 id="Y86-64的顺序实现"><a href="#Y86-64的顺序实现" class="headerlink" title="Y86-64的顺序实现"></a>Y86-64的顺序实现</h4><h4 id="流水线的通用原理"><a href="#流水线的通用原理" class="headerlink" title="流水线的通用原理"></a>流水线的通用原理</h4><h4 id="Y86-64的流水线"><a href="#Y86-64的流水线" class="headerlink" title="Y86-64的流水线"></a>Y86-64的流水线</h4><h3 id="4-优化程序性能"><a href="#4-优化程序性能" class="headerlink" title="4 优化程序性能"></a>4 优化程序性能</h3><h4 id="优化编译器的能力和局限性"><a href="#优化编译器的能力和局限性" class="headerlink" title="优化编译器的能力和局限性"></a>优化编译器的能力和局限性</h4><h4 id="表示程序性能"><a href="#表示程序性能" class="headerlink" title="表示程序性能"></a>表示程序性能</h4><h4 id="程序实例"><a href="#程序实例" class="headerlink" title="程序实例"></a>程序实例</h4><h4 id="消除循环的低效率"><a href="#消除循环的低效率" class="headerlink" title="消除循环的低效率"></a>消除循环的低效率</h4><h4 id="减少过程调用"><a href="#减少过程调用" class="headerlink" title="减少过程调用"></a>减少过程调用</h4><h4 id="消除不必要的内存引用"><a href="#消除不必要的内存引用" class="headerlink" title="消除不必要的内存引用"></a>消除不必要的内存引用</h4><h4 id="理解现代处理器"><a href="#理解现代处理器" class="headerlink" title="理解现代处理器"></a>理解现代处理器</h4><h4 id="循环展开"><a href="#循环展开" class="headerlink" title="循环展开"></a>循环展开</h4><h4 id="提高并行性"><a href="#提高并行性" class="headerlink" title="提高并行性"></a>提高并行性</h4><h4 id="一些限制因素"><a href="#一些限制因素" class="headerlink" title="一些限制因素"></a>一些限制因素</h4><h4 id="理解内存性能"><a href="#理解内存性能" class="headerlink" title="理解内存性能"></a>理解内存性能</h4><h4 id="性能提高技术"><a href="#性能提高技术" class="headerlink" title="性能提高技术"></a>性能提高技术</h4><h4 id="确认和消除性能瓶颈"><a href="#确认和消除性能瓶颈" class="headerlink" title="确认和消除性能瓶颈"></a>确认和消除性能瓶颈</h4><h3 id="5-存储器层次结构"><a href="#5-存储器层次结构" class="headerlink" title="5 存储器层次结构"></a>5 存储器层次结构</h3><h4 id="存储技术"><a href="#存储技术" class="headerlink" title="存储技术"></a>存储技术</h4><h4 id="局部性"><a href="#局部性" class="headerlink" title="局部性"></a>局部性</h4><h4 id="存储层次结构"><a href="#存储层次结构" class="headerlink" title="存储层次结构"></a>存储层次结构</h4><h4 id="高速缓存存储器"><a href="#高速缓存存储器" class="headerlink" title="高速缓存存储器"></a>高速缓存存储器</h4><h4 id="编写高速缓存友好的代码"><a href="#编写高速缓存友好的代码" class="headerlink" title="编写高速缓存友好的代码"></a>编写高速缓存友好的代码</h4><h4 id="高速缓存对程序性能的影响"><a href="#高速缓存对程序性能的影响" class="headerlink" title="高速缓存对程序性能的影响"></a>高速缓存对程序性能的影响</h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;程序结构和执行&quot;&gt;&lt;a href=&quot;#程序结构和执行&quot; class=&quot;headerlink&quot; title=&quot;程序结构和执行&quot;&gt;&lt;/a&gt;程序结构和执行&lt;/h2&gt;&lt;h3 id=&quot;1-信息的表示和处理&quot;&gt;&lt;a href=&quot;#1-信息的表示和处理&quot; class=&quot;head
+      
+    
+    </summary>
+    
+    
+      <category term="深入理解计算机系统" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="深入理解计算机系统" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python测试驱动开发-chapter01</title>
+    <link href="http://yoursite.com/2019/10/14/python%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91-chapter01/"/>
+    <id>http://yoursite.com/2019/10/14/python测试驱动开发-chapter01/</id>
+    <published>2019-10-14T03:42:52.000Z</published>
+    <updated>2019-10-14T13:31:24.019Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="python测试驱动开发" scheme="http://yoursite.com/categories/python%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="python测试驱动开发" scheme="http://yoursite.com/tags/python%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>mongoDB</title>
